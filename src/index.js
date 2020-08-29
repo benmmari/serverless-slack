@@ -105,6 +105,7 @@ class Slack extends EventEmitter {
    * @param {Object} auth - The Slack authentication
    */
   notify(payload, auth, callback) {
+    console.log(callback);
     let events = ['*'];
     let bot = new Client(auth, payload);
 
