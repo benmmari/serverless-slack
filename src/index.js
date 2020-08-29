@@ -5,7 +5,7 @@ const Client = require('./client'),
 
 
 class Slack extends EventEmitter {
-  
+
   constructor(options) {
     super();
     this.store = require('./dynamo'); // default
@@ -20,7 +20,7 @@ class Slack extends EventEmitter {
    * @param {Object} context - The Lambda context
    * @param {Function} callback - The Lambda callback
    */
-  handler(event, context, callback) {     
+  handler(event, context, callback) {
     switch(event.method) {
       case "GET": this.oauth(event, context, callback); break;
       case "POST": this.event(event, context, callback); break;
@@ -56,7 +56,7 @@ class Slack extends EventEmitter {
     if (payload.code) {
       // install app
       client.install(payload).then(save).then(success).catch(fail);
-    } else { 
+    } else {
       // sends a 301 redirect
       callback(client.getAuthUrl(payload));
     }
@@ -88,8 +88,8 @@ class Slack extends EventEmitter {
     // Events API challenge
     if (payload.challenge)
       return callback(null, payload.challenge);
-    else
-      callback();
+    // else
+      // callback();
 
     // Ignore Bot Messages
     if (!this.ignoreBots || !(payload.event || payload).bot_id) {
